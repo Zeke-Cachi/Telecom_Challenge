@@ -1,12 +1,28 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import ClientList from "./ClientList";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
+import CreateUser from "./CreateUser";
+import { FaExclamationCircle } from "react-icons/fa";
 
 const ClientTable = () => {
-  const { dniInput, triggerRequest, setTriggerRequest, clientData } =
-    useContext(UserContext);
+  const {
+    dniInput,
+    triggerRequest,
+    setTriggerRequest,
+    clientData,
+    showCreate,
+  } = useContext(UserContext);
+
+  const [filteredClients, setFilteredClients] = useState(-1);
+
+  useEffect(() => {
+    const checkClients = clientData.filter((client) =>
+      client.dni.toString().includes(dniInput.toString())
+    );
+    setFilteredClients(checkClients.length);
+  }, [dniInput]);
 
   const deleteClient = async (e, dni) => {
     e.preventDefault();
@@ -41,32 +57,24 @@ const ClientTable = () => {
         <table className="w-11/12">
           <thead className="flex justify-center w-full">
             <tr className="flex justify-evenly w-full pb-2">
-              <th className="w-24 text-start">DNI</th>
-              <th className="w-24 text-start">Nombre</th>
-              <th className="w-24 text-start">Apellido</th>
-              <th className="w-24 text-start">Sexo</th>
-              <th className="w-24 text-start">Teléfono</th>
-              <th className="w-24 text-center">Editar</th>
-              <th className="w-24 text-center">Borrar</th>
+              <th className="w-16 lg:w-24 text-start">DNI</th>
+              <th className="w-16 lg:w-24 text-start">Nombre</th>
+              <th className="w-16 lg:w-24 text-start">Apellido</th>
+              <th className="w-16 lg:w-24 text-start">Sexo</th>
+              <th className="w-16 lg:w-24 text-start">Teléfono</th>
+              <th className="w-16 lg:w-24 text-center">Editar</th>
+              <th className="w-16 lg:w-24 text-center">Borrar</th>
             </tr>
           </thead>
           <hr className="w-11/12 mx-auto bg-gray-800 h-px" />
           <tbody>
-            {dniInput !== 0
-              ? clientData
-                  .filter((client) =>
-                    client.dni.toString().includes(dniInput.toString())
-                  )
-                  .map((client, i) => {
-                    return (
-                      <ClientList
-                        client={client}
-                        key={i}
-                        onDelete={deleteClient}
-                      />
-                    );
-                  })
-              : clientData.map((client, i) => {
+            {showCreate && <CreateUser />}
+            {dniInput !== 0 &&
+              clientData
+                .filter((client) =>
+                  client.dni.toString().includes(dniInput.toString())
+                )
+                .map((client, i) => {
                   return (
                     <ClientList
                       client={client}
@@ -75,6 +83,20 @@ const ClientTable = () => {
                     />
                   );
                 })}
+
+            {dniInput !== 0 && filteredClients === 0 && (
+              <div className="w-full flex flex-col justify-around items-center my-32">
+                <FaExclamationCircle className="h-32 w-32 text-red-500" />
+                <h3 className="text-2xl mt-4">No se ha encontrado el DNI</h3>
+              </div>
+            )}
+
+            {dniInput === 0 &&
+              clientData.map((client, i) => {
+                return (
+                  <ClientList client={client} key={i} onDelete={deleteClient} />
+                );
+              })}
           </tbody>
         </table>
       </div>

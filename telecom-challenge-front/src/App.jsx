@@ -3,7 +3,7 @@ import ClientTable from "./components/ClientTable";
 
 function App() {
   return (
-    <main className="flex">
+    <main className="flex flex-col lg:flex-row">
       <SideBar />
       <ClientTable />
     </main>

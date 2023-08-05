@@ -16,13 +16,13 @@ const UserProvider = ({ children }) => {
       telefono: "",
     },
   ]);
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     const getAllData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/allusers");
         const jsonResponse = JSON.parse(response.data);
-        console.log(jsonResponse);
         setClientData(jsonResponse);
       } catch (error) {
         console.log(error);
@@ -40,6 +40,8 @@ const UserProvider = ({ children }) => {
         setTriggerRequest,
         clientData,
         setClientData,
+        showCreate,
+        setShowCreate,
       }}
     >
       {children}

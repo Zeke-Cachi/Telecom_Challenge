@@ -5,21 +5,21 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
 
 const ClientList = ({ client, onDelete }) => {
   const { triggerRequest, setTriggerRequest } = useContext(UserContext);
 
   const [showEdit, setShowEdit] = useState(false);
   const [editedData, setEditedData] = useState({
-    nombre: "",
-    apellido: "",
-    sexo: "",
-    telefono: "",
+    nombre: client.nombre,
+    apellido: client.apellido,
+    sexo: client.sexo,
+    telefono: client.telefono,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
     setEditedData((prevData) => ({ ...prevData, [name]: value }));
   };
 
@@ -42,6 +42,7 @@ const ClientList = ({ client, onDelete }) => {
       });
     } catch (error) {
       console.log(error);
+      toast("Verifique los campos ingresados");
     }
   };
 
@@ -52,12 +53,12 @@ const ClientList = ({ client, onDelete }) => {
           showEdit ? "hidden" : "block"
         }`}
       >
-        <td className="w-24">{client.dni}</td>
-        <td className="w-24">{client.nombre}</td>
-        <td className="w-24">{client.apellido}</td>
-        <td className="w-24">{client.sexo}</td>
-        <td className="w-24">{client.telefono}</td>
-        <td className="w-24">
+        <td className="w-16 lg:w-24">{client.dni}</td>
+        <td className="w-16 lg:w-24">{client.nombre}</td>
+        <td className="w-16 lg:w-24">{client.apellido}</td>
+        <td className="w-16 lg:w-24">{client.sexo}</td>
+        <td className="w-16 lg:w-24">{client.telefono}</td>
+        <td className="w-16 lg:w-24">
           <button className="text-green-600 w-full">
             <FaEdit
               className="mx-auto h-[1.2rem] w-[1.2rem] transition-all hover:scale-125"
@@ -67,7 +68,7 @@ const ClientList = ({ client, onDelete }) => {
             />
           </button>
         </td>
-        <td className="w-24">
+        <td className="w-16 lg:w-24">
           <button
             className="text-red-500 w-full rounded-md ps-2"
             onClick={(e) => onDelete(e, client.dni)}
@@ -84,43 +85,47 @@ const ClientList = ({ client, onDelete }) => {
           onSubmit={editUser}
         >
           <input
-            className="w-24 bg-red-500 placeholder:text-black rounded-md ps-2 "
+            className="w-16 lg:w-24 bg-red-500 placeholder:text-black rounded-md ps-2 "
             type="text"
             readOnly
             placeholder={client.dni}
           />
           <input
-            className="w-24 border border-gray-300 rounded-md ps-2"
+            className="w-16 lg:w-24 border border-gray-300 rounded-md ps-2"
             type="text"
             name="nombre"
             placeholder={client.nombre}
             onChange={handleChange}
           />
           <input
-            className="w-24 border border-gray-300 rounded-md ps-2"
+            className="w-16 lg:w-24 border border-gray-300 rounded-md ps-2"
             type="text"
             name="apellido"
             placeholder={client.apellido}
             onChange={handleChange}
           />
-          <input
-            className="w-24 border border-gray-300 rounded-md ps-2"
-            type="text"
-            name="sexo"
-            placeholder={client.sexo}
+
+          <select
             onChange={handleChange}
-          />
+            name="sexo"
+            className="w-16 lg:w-24 border border-gray-300 rounded-md ps-2"
+          >
+            <option placeholder="">seleccione</option>
+            <option value="masculino">masculino</option>
+            <option value="femenino">femenino</option>
+          </select>
+
           <input
-            className="w-24 border border-gray-300 rounded-md ps-1"
+            className="w-16 lg:w-24 border border-gray-300 rounded-md ps-1"
             type="text"
             name="telefono"
             placeholder={client.telefono}
             onChange={handleChange}
           />
-          <button className="text-green-600 w-24" type="submit">
+          <button className="text-green-600 w-16 lg:w-24" type="submit">
             <FaCheck className="mx-auto" />
           </button>
-          <button className="text-red-500 w-24">
+          <button className="text-red-500 w-16 lg:w-24">
             <FaTimes
               className="mx-auto"
               onClick={(e) => {
@@ -133,6 +138,7 @@ const ClientList = ({ client, onDelete }) => {
       </div>
 
       <hr className="w-11/12 mx-auto bg-gray-200 h-px" />
+      <Toaster />
     </>
   );
 };
