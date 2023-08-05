@@ -22,6 +22,7 @@ const ClientTable = () => {
       client.dni.toString().includes(dniInput.toString())
     );
     setFilteredClients(checkClients.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dniInput]);
 
   const deleteClient = async (e, dni) => {
@@ -49,9 +50,9 @@ const ClientTable = () => {
   return (
     <section className="flex justify-center w-full">
       <div className="mt-16 w-full flex flex-col items-center">
-        <div>
+        <div className="relative">
           <h1 className="text-[3rem] mb-8">Listado de clientes</h1>
-          <hr className="" />
+          <hr className="absolute top-[4rem] w-[24.5rem] h-1 border-full animate-extend bg-orange-300" />
         </div>
 
         <table className="w-11/12">

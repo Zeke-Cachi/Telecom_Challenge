@@ -115,13 +115,22 @@ const ClientList = ({ client, onDelete }) => {
             <option value="femenino">femenino</option>
           </select>
 
-          <input
-            className="w-16 lg:w-24 border border-gray-300 rounded-md ps-1"
-            type="text"
-            name="telefono"
-            placeholder={client.telefono}
-            onChange={handleChange}
-          />
+          <div className="group relative">
+            <input
+              className="w-16 lg:w-24 border border-gray-300 rounded-md ps-1"
+              type="text"
+              name="telefono"
+              placeholder={client.telefono}
+              onChange={handleChange}
+            />
+            <div className="absolute hidden group-hover:block chat chat-start top-[-4rem] left-[7rem] w-48 text-center">
+              <div className="chat-bubble">
+                El teléfono debe tener 10 dígitos
+              </div>
+              <div className="chat chat-end"></div>
+            </div>
+          </div>
+
           <button className="text-green-600 w-16 lg:w-24" type="submit">
             <FaCheck className="mx-auto" />
           </button>
@@ -137,7 +146,7 @@ const ClientList = ({ client, onDelete }) => {
         </form>
       </div>
 
-      <hr className="w-11/12 mx-auto bg-gray-200 h-px" />
+      <hr className="w-11/12 mx-auto bg-gray-200 h-px animate-extend" />
       <Toaster />
     </>
   );

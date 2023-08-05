@@ -77,12 +77,20 @@ const CreateUser = () => {
           <option value="masculino">masculino</option>
           <option value="femenino">femenino</option>
         </select>
-        <input
-          className="w-16 md:w-24 border border-gray-300 rounded-md ps-1"
-          type="text"
-          name="telefono"
-          onChange={handleChange}
-        />
+        <div className="group relative">
+          <input
+            className="w-16 md:w-24 border border-gray-300 rounded-md ps-1"
+            type="text"
+            name="telefono"
+            title="El teléfono debe consistir de 10 dígitos"
+            onChange={handleChange}
+          />
+          <div className="absolute hidden group-hover:block chat chat-start top-[-4rem] left-[7rem] w-48 text-center">
+            <div className="chat-bubble">El teléfono debe tener 10 dígitos</div>
+            <div className="chat chat-end"></div>
+          </div>
+        </div>
+
         <button
           className="text-green-700 rounded-md w-16 md:w-24 border border-green-700 bg-green-200 transition-all hover:bg-white"
           type="submit"
