@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import ClientList from "./ClientList";
@@ -6,31 +5,8 @@ import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 
 const ClientTable = () => {
-  const { dniInput } = useContext(UserContext);
-
-  const [triggerRequest, setTriggerRequest] = useState(true);
-  const [clientData, setClientData] = useState([
-    {
-      dni: 0,
-      nombre: "",
-      apellido: "",
-      sexo: "",
-      telefono: "",
-    },
-  ]);
-
-  useEffect(() => {
-    const getAllData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/allusers");
-        const jsonResponse = JSON.parse(response.data);
-        setClientData(jsonResponse);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllData();
-  }, [triggerRequest]);
+  const { dniInput, triggerRequest, setTriggerRequest, clientData } =
+    useContext(UserContext);
 
   const deleteClient = async (e, dni) => {
     e.preventDefault();

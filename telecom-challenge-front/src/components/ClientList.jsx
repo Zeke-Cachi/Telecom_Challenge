@@ -1,9 +1,49 @@
 /* eslint-disable react/prop-types */
 import { FaEdit, FaRegWindowClose, FaCheck, FaTimes } from "react-icons/fa";
 import { useState } from "react";
+import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+import Swal from "sweetalert2";
 
 const ClientList = ({ client, onDelete }) => {
+  const { triggerRequest, setTriggerRequest } = useContext(UserContext);
+
   const [showEdit, setShowEdit] = useState(false);
+  const [editedData, setEditedData] = useState({
+    nombre: "",
+    apellido: "",
+    sexo: "",
+    telefono: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setEditedData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const editUser = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/edituser/${client.dni}`,
+        editedData
+      );
+      console.log(response);
+      setTriggerRequest(!triggerRequest);
+      setShowEdit(!showEdit);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Cliente editado!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -37,10 +77,14 @@ const ClientList = ({ client, onDelete }) => {
         </td>
       </tr>
 
+      {/* FORMULARIO PARA EDITAR CLIENTE */}
       <div className={`${!showEdit ? "hidden" : "block"} w-full`}>
-        <form className="w-full flex justify-evenly text-start py-2">
+        <form
+          className="w-full flex justify-evenly text-start py-2"
+          onSubmit={editUser}
+        >
           <input
-            className="w-24 bg-red-500 text-black"
+            className="w-24 bg-red-500 placeholder:text-black rounded-md ps-2 "
             type="text"
             readOnly
             placeholder={client.dni}
@@ -48,28 +92,42 @@ const ClientList = ({ client, onDelete }) => {
           <input
             className="w-24 border border-gray-300 rounded-md ps-2"
             type="text"
+            name="nombre"
             placeholder={client.nombre}
+            onChange={handleChange}
           />
           <input
             className="w-24 border border-gray-300 rounded-md ps-2"
             type="text"
+            name="apellido"
             placeholder={client.apellido}
+            onChange={handleChange}
           />
           <input
             className="w-24 border border-gray-300 rounded-md ps-2"
             type="text"
+            name="sexo"
             placeholder={client.sexo}
+            onChange={handleChange}
           />
           <input
-            className="w-24 border border-gray-300 rounded-md ps-2"
+            className="w-24 border border-gray-300 rounded-md ps-1"
             type="text"
+            name="telefono"
             placeholder={client.telefono}
+            onChange={handleChange}
           />
-          <button className="text-green-600 w-24">
+          <button className="text-green-600 w-24" type="submit">
             <FaCheck className="mx-auto" />
           </button>
           <button className="text-red-500 w-24">
-            <FaTimes className="mx-auto" />
+            <FaTimes
+              className="mx-auto"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowEdit(!showEdit);
+              }}
+            />
           </button>
         </form>
       </div>
