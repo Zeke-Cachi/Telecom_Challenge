@@ -37,6 +37,14 @@ Para el frontend se usó React + Vite. Se inicializa con el siguiente comando:
 
 `npm run dev`
 
+###### Estructura de carpetas
+
+scr
+&emsp;&emsp;&emsp; assets (imágenes)
+&emsp;&emsp;&emsp; components (todos los componentes del proyecto)
+&emsp;&emsp;&emsp; context (contiene el context que mantiene los estados globales)
+
+
 Para obtener la mayor simplicidad para el usuario, la interfaz se maneja con el renderizado condicional de los distintos elementos, manejados a traves de distintos useState en un Context. En éste, también se reciben los datos de la database y se guardan para su uso:
 
 `useEffect(() => {
