@@ -41,7 +41,9 @@ Para el frontend se usó React + Vite. Se inicializa con el siguiente comando:
 
 scr
 ---- assets (imágenes)
+
 ---- components (todos los componentes del proyecto)
+
 ---- context (contiene el context que mantiene los estados globales)
 
 
@@ -77,8 +79,11 @@ El backend se creó usando NodeJS + Express. Se inicializa con el siguiente coma
 ###### Estructura de carpetas
 
 controllers (tiene los controladores que manejan la lógica)
+
 db (tiene la conexión a la base de datos MySQL)
+
 middleware (tiene las verificaciones)
+
 routes (tiene las rutas de los endpoints)
 
 
