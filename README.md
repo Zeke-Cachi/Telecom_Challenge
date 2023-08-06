@@ -40,9 +40,9 @@ Para el frontend se usó React + Vite. Se inicializa con el siguiente comando:
 ###### Estructura de carpetas
 
 scr
-&emsp;&emsp;&emsp; assets (imágenes)
-&emsp;&emsp;&emsp; components (todos los componentes del proyecto)
-&emsp;&emsp;&emsp; context (contiene el context que mantiene los estados globales)
+---- assets (imágenes)
+---- components (todos los componentes del proyecto)
+---- context (contiene el context que mantiene los estados globales)
 
 
 Para obtener la mayor simplicidad para el usuario, la interfaz se maneja con el renderizado condicional de los distintos elementos, manejados a traves de distintos useState en un Context. En éste, también se reciben los datos de la database y se guardan para su uso:
@@ -73,6 +73,15 @@ El CSS fue escrito con TailwindCSS, un framework que permite desarrollar estilos
 El backend se creó usando NodeJS + Express. Se inicializa con el siguiente comando (usando Nodemon en devDependencies): 
 
 `npm start`
+
+###### Estructura de carpetas
+
+controllers (tiene los controladores que manejan la lógica)
+db (tiene la conexión a la base de datos MySQL)
+middleware (tiene las verificaciones)
+routes (tiene las rutas de los endpoints)
+
+
 
 El servidor sigue el modelo MVC, con una conexión a una base de datos MySQL, un archivo donde están las rutas (user.js), y sus respectivos controladores (userController.js). Para todas las validaciones en los inputs de crear y editar, se usaron middlewares.
 
