@@ -40,6 +40,7 @@ Para el frontend se usó React + Vite. Se inicializa con el siguiente comando:
 ###### Estructura de carpetas
 
 scr
+
 ---- assets (imágenes)
 
 ---- components (todos los componentes del proyecto)
