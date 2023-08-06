@@ -98,7 +98,8 @@ Se usó Morgan para verificar los registros, y para verificar los request y resp
 ### Observaciones
 
 * En mis últimos proyectos venía trabajando con TypeScript, pero en este caso usé JavaScript puro, para mayor velocidad.
-* Para la creación de la base de datos usé MySql Workbench 8.0. El archivo .sql está en esta carpeta con el nombre "clientes-db.sql". 
+* Para la creación de la base de datos usé MySql Workbench 8.0. El archivo .sql está en esta carpeta con el nombre "clientes-db.sql". Para usarse, en la carpeta root (telecom-challenge-back), se deberá crear un archivo .env con las variables necesarias para la conexión a la base de datos (host, port, user, password y nombre de la database), con los datos de su particular usuario.
+
 
 
   
