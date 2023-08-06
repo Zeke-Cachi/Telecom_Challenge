@@ -6,7 +6,6 @@ const SearchBar = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
     setDniInput(value);
   };
 

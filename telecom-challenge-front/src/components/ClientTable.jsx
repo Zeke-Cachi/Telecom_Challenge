@@ -17,6 +17,8 @@ const ClientTable = () => {
 
   const [filteredClients, setFilteredClients] = useState(-1);
 
+  //ESTE USEEFFECT ES PARA VERIFICAR CUANDO DEBE MOSTRARSE EL CARTEL DE "NO SE ENCONTRÓ DNI",
+  //YA QUE DE OTRO MODO LO HUBIERA MOSTRADO ANTES DE LA BÚSQUEDA
   useEffect(() => {
     const checkClients = clientData.filter((client) =>
       client.dni.toString().includes(dniInput.toString())
@@ -70,6 +72,8 @@ const ClientTable = () => {
           <hr className="w-11/12 mx-auto bg-gray-800 h-px" />
           <tbody>
             {showCreate && <CreateUser />}
+
+            {/* TODO LO SIGUIENTE ES EL RENDERIZADO CONDICIONAL DE LA BÚSQUEDA POR DNI */}
             {dniInput !== 0 &&
               clientData
                 .filter((client) =>

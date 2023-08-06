@@ -5,6 +5,7 @@ import axios from "axios";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  //USESTATES PARA MANEJAR LOS RENDERIZADOS CONDICIONALES Y GUARDAR LOS DATOS
   const [dniInput, setDniInput] = useState(0);
   const [triggerRequest, setTriggerRequest] = useState(true);
   const [clientData, setClientData] = useState([
@@ -18,6 +19,7 @@ const UserProvider = ({ children }) => {
   ]);
   const [showCreate, setShowCreate] = useState(false);
 
+  //USEEFFECT INICIAL PARA RECIBIR LOS DATOS DE LA DATABASE, SE DISPARA EN CADA OPERACION CRUD
   useEffect(() => {
     const getAllData = async () => {
       try {

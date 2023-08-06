@@ -10,7 +10,8 @@ const CreateButton = () => {
         e.preventDefault();
         setShowCreate(!showCreate);
       }}
-      className="btn w-28 md:w-auto lg:mt-32 outline-none border-2 border-gray-500 rounded-md bg-gray-700 text-white text-opacity-80 hover:text-black"
+      className="btn w-28 md:w-auto lg:mt-32 outline-none border-2
+      border-gray-500 rounded-md bg-gray-700 text-white text-opacity-80 hover:text-black"
     >
       Crear nuevo cliente
     </button>
